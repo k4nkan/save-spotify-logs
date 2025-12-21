@@ -7,10 +7,13 @@ Automatically refreshes access tokens when expired.
 import os
 from base64 import b64encode
 import requests
+from dotenv import load_dotenv
 
-CLIENT_ID = os.environ["SPOTIFY_CLIENT_ID"]
-CLIENT_SECRET = os.environ["SPOTIFY_CLIENT_SECRET"]
-REFRESH_TOKEN = os.environ["SPOTIFY_REFRESH_TOKEN"]
+load_dotenv()
+
+CLIENT_ID = os.getenv("SPOTIFY_CLIENT_ID")
+CLIENT_SECRET = os.getenv("SPOTIFY_CLIENT_SECRET")
+REFRESH_TOKEN = os.getenv("SPOTIFY_REFRESH_TOKEN")
 
 
 class SpotifyAuth:
