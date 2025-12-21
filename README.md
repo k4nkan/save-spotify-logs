@@ -21,7 +21,13 @@ This repository fetches your recent Spotify listening history and saves it to a 
     Create an application on the Spotify Developer Dashboard to obtain your **Client ID** and **Client Secret**.
 
 2.  **Set Environment Variables:**
-    Configure the following environment variables. These are essential for the scripts (`auth.py` and `save_spotify_logs.py`) to function.
+    Copy the example environment file and fill in your credentials:
+
+    ```bash
+    cp .env.example .env
+    ```
+
+    Configure the following in your `.env` file:
 
     - `SPOTIFY_CLIENT_ID`: Your Spotify Application's Client ID.
     - `SPOTIFY_CLIENT_SECRET`: Your Spotify Application's Client Secret.
@@ -40,7 +46,7 @@ This repository fetches your recent Spotify listening history and saves it to a 
     Run the main script. It will automatically handle token refresh using `auth.py`.
 
     ```bash
-    python save_spotify_logs.py
+    python scripts/save_spotify_logs.py
     ```
 
-This process will save tracks played within the **last hour** to the `spotify-logs` table in your Supabase database.
+This process will save tracks played within the **last hour** to the `spotify-playback-history` table (and upsert tracks to `spotify-tracks`) in your Supabase database.
