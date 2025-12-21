@@ -34,4 +34,4 @@ jobs:
 
       - name: Run save_spotify_logs
         run: |
-          python save_spotify_logs.py
+          python scripts/save_spotify_logs.py

@@ -52,13 +52,14 @@ def upsert_track(track: dict):
 
 def insert_play_log(track_id: str, played_at: datetime):
     """
-    Insert play log to Supabase.
+    Upsert play log to Supabase.
     """
-    supabase.table("spotify-playback-history").insert(
+    supabase.table("spotify-playback-history").upsert(
         {
             "track_id": track_id,
             "played_at": played_at.isoformat(),
-        }
+        },
+        on_conflict="track_id,played_at",
     ).execute()
 
 
@@ -76,10 +77,10 @@ def save_recent_logs(items):  # pylint: disable=redefined-outer-name
 
 if __name__ == "__main__":
     auth = SpotifyAuth()
-    print("✅ Spotify auth loaded")
+    print("✅ : Spotify auth loaded")
 
     items = fetch_recent_tracks(auth)
-    print(f"✅ fetched {len(items)} tracks")
+    print(f"✅ : fetched {len(items)} tracks")
 
     save_recent_logs(items)
-    print("✅ logs saved")
+    print("✅ : logs saved")
