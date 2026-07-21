@@ -45,9 +45,16 @@ Open the printed URL, approve the app, and copy the printed `SPOTIFY_REFRESH_TOK
     - `SPOTIFY_CLIENT_SECRET`: Your Spotify Application's Client Secret.
     - `SPOTIFY_REFRESH_TOKEN`: The refresh token for accessing the Spotify API (see "How to Get Refresh Token" above).
     - `SUPABASE_URL`: Your target Supabase project URL.
-    - `SUPABASE_KEY`: The Supabase service role key or Anon Public Key with write permissions.
+    - `SUPABASE_KEY`: Your Supabase service role key.
 
-3.  **Install Dependencies:**
+3.  **Set Up Database:**
+    Run the SQL in Supabase SQL Editor.
+
+    ```text
+    tools/setup_database.sql
+    ```
+
+4.  **Install Dependencies:**
     Install the project's required Python packages.
 
     ```bash
@@ -56,7 +63,7 @@ Open the printed URL, approve the app, and copy the printed `SPOTIFY_REFRESH_TOK
     python -m pip install -r requirements.txt
     ```
 
-4.  **Execute the Script:**
+5.  **Execute the Script:**
     Run the main script. It will automatically handle token refresh using `auth.py`.
 
     ```bash
