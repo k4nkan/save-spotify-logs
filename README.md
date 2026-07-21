@@ -11,7 +11,19 @@ This repository fetches your recent Spotify listening history and saves it to a 
 
 ## How to Get Refresh Token
 
-[Article](https://zenn.dev/litkyan/articles/0ee3dda9eef4bd)
+Register this Redirect URI in the Spotify Developer Dashboard:
+
+```text
+http://[::1]:5000/callback
+```
+
+Then run:
+
+```bash
+python tools/get_refresh_token.py
+```
+
+Open the printed URL, approve the app, and copy the printed `SPOTIFY_REFRESH_TOKEN` to `.env`.
 
 ---
 
@@ -39,7 +51,9 @@ This repository fetches your recent Spotify listening history and saves it to a 
     Install the project's required Python packages.
 
     ```bash
-    pip install requests python-dotenv supabase
+    python -m venv .venv
+    source .venv/bin/activate
+    python -m pip install -r requirements.txt
     ```
 
 4.  **Execute the Script:**
@@ -50,3 +64,5 @@ This repository fetches your recent Spotify listening history and saves it to a 
     ```
 
 This process will save tracks played within the **last hour** to the `spotify-playback-history` table (and upsert tracks to `spotify-tracks`) in your Supabase database.
+
+GitHub Actions runs this script hourly and retries it up to 3 times on failure.
