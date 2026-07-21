@@ -4,21 +4,23 @@ Save Spotify logs to Supabase.
 
 import os
 from datetime import datetime
+from pathlib import Path
 
 import requests
 from dotenv import load_dotenv
-from supabase import Client, create_client
-
+from supabase import create_client
 from auth import SpotifyAuth
 
-load_dotenv()
-
-SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_KEY = os.getenv("SUPABASE_KEY")
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+ROOT_DIR = Path(__file__).resolve().parents[1]
+load_dotenv(ROOT_DIR / ".env", override=True)
 
 
-def fetch_recent_tracks(auth: SpotifyAuth):  # pylint: disable=redefined-outer-name
+SUPABASE_URL: str = os.environ["SUPABASE_URL"]
+SUPABASE_KEY: str = os.environ["SUPABASE_KEY"]
+supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+
+def fetch_recent_tracks(auth: SpotifyAuth):
     """
     Fetch recent tracks from Spotify.
     """

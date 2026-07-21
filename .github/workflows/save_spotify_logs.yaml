@@ -34,4 +34,17 @@ jobs:
 
       - name: Run save_spotify_logs
         run: |
-          python scripts/save_spotify_logs.py
+          for attempt in 1 2 3; do
+            echo "Attempt ${attempt}/3"
+
+            if python scripts/save_spotify_logs.py; then
+              exit 0
+            fi
+
+            if [ "${attempt}" -lt 3 ]; then
+              echo "Retrying in 60 seconds..."
+              sleep 60
+            fi
+          done
+
+          exit 1
